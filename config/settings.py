@@ -12,7 +12,8 @@ DEFAULT_MODEL = "person_detect_v4.pt"
 MODEL_PATH = os.path.join(MODEL_DIR, DEFAULT_MODEL)
 
 # 카메라 설정
-CAMERA_INDEX = 0
+CAMERA_INDICES = [0, 1]  # 사용 가능한 카메라 인덱스 리스트
+CAMERA_INDEX = CAMERA_INDICES[0]  # 기본 카메라
 CAMERA_BACKEND = "CAP_DSHOW"  # Windows 권장
 CAMERA_BUFFER_SIZE = 1
 CAMERA_MAX_RETRIES = 10

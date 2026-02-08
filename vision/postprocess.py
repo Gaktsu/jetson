@@ -35,7 +35,8 @@ def draw_detections(
     names: List[str],
     fps: float = 0.0,
     detection_count: int = 0,
-    saving: bool = False
+    saving: bool = False,
+    camera_index: int = 0
 ) -> cv2.Mat:
     """
     탐지 결과를 프레임에 그리기
@@ -121,5 +122,23 @@ def draw_detections(
         x_pos = w - text_size[0] - 10
         cv2.putText(frame, text_count, (x_pos, y_offset + 60),
                    cv2.FONT_HERSHEY_SIMPLEX, font_scale, color, thickness, cv2.LINE_AA)
+        
+        # 카메라 번호
+        text_camera = f"Camera: {camera_index}"
+        text_size = cv2.getTextSize(text_camera, cv2.FONT_HERSHEY_SIMPLEX, font_scale, thickness)[0]
+        x_pos = w - text_size[0] - 10
+        cv2.putText(frame, text_camera, (x_pos, y_offset + 90),
+                   cv2.FONT_HERSHEY_SIMPLEX, font_scale, color, thickness, cv2.LINE_AA)
+    
+    # 좌하단 메뉴 (항상 표시)
+    menu_font_scale = 0.5
+    menu_thickness = 1
+    menu_color = (255, 255, 255)
+    menu_y_start = h - 50
+    
+    cv2.putText(frame, "[Q] Exit", (10, menu_y_start),
+               cv2.FONT_HERSHEY_SIMPLEX, menu_font_scale, menu_color, menu_thickness, cv2.LINE_AA)
+    cv2.putText(frame, "[C] Switch Camera", (10, menu_y_start + 20),
+               cv2.FONT_HERSHEY_SIMPLEX, menu_font_scale, menu_color, menu_thickness, cv2.LINE_AA)
     
     return frame
